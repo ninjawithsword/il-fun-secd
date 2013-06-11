@@ -1,0 +1,7 @@
+ghci
+:l SECD2.hs
+runCodeGen (compileMain (Lambda "x" (Var "x")))
+writeBytecode "output" (assemble (resolveLabels (runCodeGen (compileMain (App (Lambda "x" (Var "x")) (Const 5))))))
+gcc -o secd secd.c
+./secd < output
+
